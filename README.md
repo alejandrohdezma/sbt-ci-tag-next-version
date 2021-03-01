@@ -9,7 +9,7 @@ This plugin provides a set of SBT tasks that can be used to auto-increase the ve
 Add the following line to your `plugins.sbt` file:
 
 ```sbt
-addSbtPlugin("com.alejandrohdezma" %% "sbt-ci-tag-next-version" % "0.0.0")
+addSbtPlugin("com.alejandrohdezma" %% "sbt-ci-tag-next-version" % "0.1.0")
 ```
 
 ## Usage
@@ -32,15 +32,21 @@ In order to be recognized by [sbt-dynver](https://github.com/dwijnand/sbt-dynver
 
 If you're not seeing what you expect, then either start with this:
 
-    git tag -a v0.0.1 -m "Initial version tag for sbt-dynver"
+```bash
+git tag -a v0.0.1 -m "Initial version tag for sbt-dynver"
+```
 
 or change the value of `ThisBuild / dynverVTagPrefix` to remove the requirement for the v-prefix:
 
-    ThisBuild / dynverVTagPrefix := false
+```sbt
+ThisBuild / dynverVTagPrefix := false
+```
 
 or, more generally, use `ThisBuild / dynverTagPrefix` to fully customising tag prefixes, for example:
 
-    ThisBuild / dynverTagPrefix := "foo-" // our tags have the format foo-<version>, e.g. foo-1.2.3
+```sbt
+ThisBuild / dynverTagPrefix := "foo-" // our tags have the format foo-<version>, e.g. foo-1.2.3
+```
 
 [github-action]: https://github.com/alejandrohdezma/sbt-ci-tag-next-version/actions
 [github-action-badge]: https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Falejandrohdezma%2Fsbt-ci-tag-next-version%2Fbadge%3Fref%3Dmaster&style=flat
