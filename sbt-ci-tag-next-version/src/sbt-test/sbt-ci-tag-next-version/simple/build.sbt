@@ -36,7 +36,8 @@ TaskKey[Unit]("createRemoteRepository") := {
 }
 
 TaskKey[Unit]("checkRemoteTags") := {
-  val remoteTags = ("git ls-remote --tags origin" !!).trim()
+  val remoteTags =
+    (s"git ls-remote --tags https://${sys.env("GITHUB_TOKEN")}@github.com/alejandrohdezma/sbt-ci-tag-next-version-${hash.value}.git" !!).trim()
 
   assert(remoteTags.nonEmpty, "No tags found in remote")
 
