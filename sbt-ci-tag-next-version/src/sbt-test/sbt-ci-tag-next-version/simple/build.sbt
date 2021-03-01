@@ -30,7 +30,7 @@ TaskKey[Unit]("createRemoteRepository") := {
     s"""{"name":"sbt-ci-tag-next-version-${hash.value}", "private": true}"""
   ) !
 
-  s"git remote add origin git@github.com:alejandrohdezma/sbt-ci-tag-next-version-${hash.value}.git" !
+  s"git remote add origin https://github.com/alejandrohdezma/sbt-ci-tag-next-version-${hash.value}.git" !
 }
 
 TaskKey[Unit]("checkRemoteTags") := {
