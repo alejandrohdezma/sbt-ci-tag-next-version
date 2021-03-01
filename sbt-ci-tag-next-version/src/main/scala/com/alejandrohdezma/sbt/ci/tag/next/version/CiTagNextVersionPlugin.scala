@@ -77,9 +77,17 @@ object CiTagNextVersionPlugin extends AutoPlugin {
     if (remotes.size != 1) // scalafix:ok DisableSyntax.!=
       sys.error(s"Only repositories with one remote are supported. Remotes found: ${remotes.mkString(", ")}")
 
-    val remote = remotes.head // scalafix:ok Disable.head
+    val remote = remotes.head /* scalafix:ok */
 
-    val pushed = s"git push $remote $newTag" !!
+    val remoteUri = {
+      val url = s"git config --get remote.$remote.url" !!
+
+      sys.env.get("GITHUB_TOKEN").filter(_ => url.startsWith("https://")).fold(url) { token =>
+        s"https://$token@" + url.drop(8)
+      }
+    }
+
+    val pushed = s"git push $remoteUri $newTag" !!
 
     logger.info(pushed)
 

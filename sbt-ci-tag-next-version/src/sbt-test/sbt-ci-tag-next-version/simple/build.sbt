@@ -31,6 +31,8 @@ TaskKey[Unit]("createRemoteRepository") := {
   ) !
 
   s"git remote add origin https://github.com/alejandrohdezma/sbt-ci-tag-next-version-${hash.value}.git" !
+
+  s"git push -u https://${sys.env("GITHUB_TOKEN")}@github.com/alejandrohdezma/sbt-ci-tag-next-version-${hash.value}.git main" !
 }
 
 TaskKey[Unit]("checkRemoteTags") := {

@@ -15,7 +15,6 @@ $ touch miau.txt
 
 # Create a temporary remote repository and push changes
 > createRemoteRepository
-> git push -u origin main
 
 # Increase minor version and ensure tag is succesfully created in remote
 > ciTagNextMinorVersion
