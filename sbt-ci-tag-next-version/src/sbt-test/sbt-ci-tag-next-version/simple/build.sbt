@@ -1,8 +1,11 @@
+import scala.util.Random
 import sys.process._
 
-TaskKey[Unit]("removeRemoteRepository") := {
-  val sha = ("git rev-parse --short HEAD" !!).trim()
+val hash = settingKey[String]("")
 
+Global / hash := Random.alphanumeric.take(5).mkString
+
+TaskKey[Unit]("removeRemoteRepository") := {
   Seq(
     "curl",
     "-sS",
@@ -10,13 +13,11 @@ TaskKey[Unit]("removeRemoteRepository") := {
     "DELETE",
     "-H",
     s"Authorization: token ${sys.env("GITHUB_TOKEN")}",
-    s"https://api.github.com/repos/alejandrohdezma/sbt-ci-tag-next-version-$sha"
+    s"https://api.github.com/repos/alejandrohdezma/sbt-ci-tag-next-version-${hash.value}"
   ) !
 }
 
 TaskKey[Unit]("createRemoteRepository") := {
-  val sha = ("git rev-parse --short HEAD" !!).trim()
-
   Seq(
     "curl",
     "-sS",
@@ -26,10 +27,10 @@ TaskKey[Unit]("createRemoteRepository") := {
     s"Authorization: token ${sys.env("GITHUB_TOKEN")}",
     "https://api.github.com/user/repos",
     "-d",
-    s"""{"name":"sbt-ci-tag-next-version-$sha", "private": true}"""
+    s"""{"name":"sbt-ci-tag-next-version-${hash.value}", "private": true}"""
   ) !
 
-  s"git remote add origin git@github.com:alejandrohdezma/sbt-ci-tag-next-version-$sha.git" !
+  s"git remote add origin git@github.com:alejandrohdezma/sbt-ci-tag-next-version-${hash.value}.git" !
 }
 
 TaskKey[Unit]("checkRemoteTags") := {
