@@ -9,7 +9,7 @@ This plugin provides a set of SBT tasks that can be used to auto-increase the ve
 Add the following line to your `plugins.sbt` file:
 
 ```sbt
-addSbtPlugin("com.alejandrohdezma" %% "sbt-ci-tag-next-version" % "@VERSION@")
+addSbtPlugin("com.alejandrohdezma" % "sbt-ci-tag-next-version" % "@VERSION@")
 ```
 
 ## Usage
