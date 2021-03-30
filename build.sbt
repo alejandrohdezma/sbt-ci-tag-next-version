@@ -19,4 +19,4 @@ lazy val `sbt-ci-tag-next-version` = project
   .settings(scriptedLaunchOpts += s"-Dplugin.version=${version.value}")
   .settings(scriptedBufferLog := false)
   .settings(addSbtPlugin("com.dwijnand" % "sbt-dynver" % "4.1.1"))
-  .settings(libraryDependencies += "org.scalameta" %% "munit" % "0.7.22" % Test)
+  .settings(libraryDependencies += "org.scalameta" %% "munit" % "0.7.23" % Test)
