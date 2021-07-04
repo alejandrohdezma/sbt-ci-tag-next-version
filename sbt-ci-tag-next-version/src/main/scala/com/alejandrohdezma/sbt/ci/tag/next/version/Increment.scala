@@ -18,9 +18,7 @@ package com.alejandrohdezma.sbt.ci.tag.next.version
 
 sealed abstract class Increment(private val increment: PartialFunction[String, String]) {
 
-  /**
-   * Increments the provided version with this specific increment.
-   */
+  /** Increments the provided version with this specific increment. */
   final def apply(version: String): String =
     increment.applyOrElse(version, (version: String) => sys.error(s"Unable to extract version from $version"))
 
